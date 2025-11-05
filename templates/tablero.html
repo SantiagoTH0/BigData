@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Tablero Power BI{% endblock %}
+
+{% block content %}
+<section class="section-banner">
+  <img class="section-banner-img" src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1600&auto=format&fit=crop" alt="Visualización de KPIs">
+  <div class="section-banner-overlay"></div>
+  <div class="section-banner-content">
+    <div>
+      <h1>Tablero Power BI</h1>
+      <p class="lead">KPIs operativos para monitoreo de respuesta y desempeño.</p>
+    </div>
+  </div>
+</section>
+
+<div class="report-embed mb-3">
+  <div>
+    <i class="bi bi-bar-chart-fill" style="font-size:1.6rem;"></i>
+    <p class="mt-2 mb-0">Aquí se incrustará el informe de Power BI (iframe/publicación).</p>
+  </div>
+  <!-- Ejemplo de iframe (reemplazar src con URL pública cuando esté disponible) -->
+  <!--
+  <iframe src="https://app.powerbi.com/view?r=YOUR_PUBLIC_REPORT_ID" style="width:100%; height:100%; border:0; border-radius:14px;" allowfullscreen></iframe>
+  -->
+</div>
+
+<div class="row g-3">
+  <div class="col-12 col-md-4">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-speedometer2"></i></div>
+      <div class="stage-title mt-2">Tiempo de respuesta</div>
+      <p class="stage-desc mb-0">Promedio por zona y tipo de incidente; distribución y tendencias.</p>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-geo-alt"></i></div>
+      <div class="stage-title mt-2">Cobertura</div>
+      <p class="stage-desc mb-0">Mapa de disponibilidad de unidades y demanda estimada por horario.</p>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-heart-pulse"></i></div>
+      <div class="stage-title mt-2">Impacto</div>
+      <p class="stage-desc mb-0">Indicadores de eficacia operativa y reducción de demoras críticas.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

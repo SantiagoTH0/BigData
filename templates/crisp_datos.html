@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Comprensión de los Datos · CRISP-DM{% endblock %}
+
+{% block content %}
+<section class="section-banner">
+  
+  <div class="section-banner-overlay"></div>
+  <div class="section-banner-content">
+    <div>
+      <h1>Comprensión de los Datos</h1>
+      <p class="lead">Catalogar fuentes, evaluar calidad y descubrir patrones clave.</p>
+    </div>
+  </div>
+</section>
+
+<div class="row g-3">
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-map"></i></div>
+      <div class="stage-title mt-2">Fuentes</div>
+      <p class="stage-desc mb-0">GPS de unidades, incidentes, tráfico, clima, disponibilidad hospitalaria y reportes ciudadanos.</p>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-shield-check"></i></div>
+      <div class="stage-title mt-2">Calidad</div>
+      <p class="stage-desc mb-0">Completitud, consistencia, validez temporal y geográfica; detección de outliers y duplicados.</p>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-bar-chart-fill"></i></div>
+      <div class="stage-title mt-2">Exploración</div>
+      <p class="stage-desc mb-0">Distribuciones, correlaciones y series temporales para orientar preparación y modelado.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Modelado y Evaluación · CRISP-DM{% endblock %}
+
+{% block content %}
+<section class="section-banner">
+  
+  <div class="section-banner-overlay"></div>
+  <div class="section-banner-content">
+    <div>
+      <h1>Modelado y Evaluación</h1>
+      <p class="lead">Comparar modelos, medir desempeño y validar criterios de aceptación.</p>
+    </div>
+  </div>
+</section>
+
+<div class="row g-3">
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-diagram-3"></i></div>
+      <div class="stage-title mt-2">Modelos</div>
+      <p class="stage-desc mb-0">Regresión, árboles, boosting y rutas óptimas; selección por desempeño y costo.</p>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-graph-up-arrow"></i></div>
+      <div class="stage-title mt-2">Métricas</div>
+      <p class="stage-desc mb-0">MAE/ RMSE para ETA, exactitud de clasificación, cobertura y tiempos de respuesta.</p>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-check2-circle"></i></div>
+      <div class="stage-title mt-2">Validación y Aceptación</div>
+      <p class="stage-desc mb-0">K-fold y pruebas fuera de muestra; umbrales operativos para despliegue.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

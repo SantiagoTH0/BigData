@@ -1,12 +1,73 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Aplicación Flask</title>
-</head>
-<body>
-    <h1>Bienvenido a mi Aplicación Flask</h1>
-    <p>Esta es una página de ejemplo creada con Flask.</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Inicio · Gestión de vehiculos de emergencia{% endblock %}
+
+{% block content %}
+<section class="section-banner mb-4">
+  <div class="section-banner-overlay"></div>
+  <div class="section-banner-content">
+    <div>
+      <h1>Gestión de vehículos de emergencia</h1>
+      <p class="lead">Coordinación inteligente para respuesta rápida y segura.</p>
+      <div class="mt-3">
+        <a class="btn btn-siren" href="{{ url_for('crisp_negocio') }}">
+          <i class="bi bi-graph-up"></i> Ver etapas CRISP-DM
+        </a>
+        <span class="badge-theme ms-2">Ciudad inteligente</span>
+      </div>
+    </div>
+  </div>
+  </section>
+
+<div class="row g-3">
+  <div class="col-12">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-info-circle-fill"></i></div>
+      <div class="stage-title mt-2">Descripción</div>
+      <p class="stage-desc mb-0">Este proyecto integra la arquitectura de datos con plataformas de análisis y desarrollo web para optimizar la toma de decisiones logísticas en tiempo real. Nuestro enfoque asegura que los activos críticos (ambulancias, bomberos, patrullas) sean despachados, monitoreados y mantenidos con la máxima eficacia.</p>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+      <div class="stage-title mt-2">Contexto</div>
+      <p class="stage-desc mb-0">El sistema que hemos desarrollado aborda un problema muy grave y real en muchas comunidades: la gestión lenta y caótica de los vehículos de emergencia. En las ciudades que no son "inteligentes", la falta de información en tiempo real pone vidas en riesgo. El desempeño se mide con reportes viejos, y nadie sabe realmente dónde está la ambulancia más cercana.</p>
+      <p class="stage-desc mb-0">Por eso, nuestro proyecto nace de la necesidad de salvar ese tiempo valioso. Creamos este sistema desde cero, pues, como no teníamos datos reales de una ciudad, simulamos todos los millones de registros de telemetría y eventos para probar nuestro modelo, garantizando que el diseño funciona con la presión de una operación real.
+      
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-bullseye"></i></div>
+      <div class="stage-title mt-2">Objetivos</div>
+      <p class="stage-desc mb-0"><strong>Reducción del TTA (Time to Arrival):</strong> Reducir el tiempo promedio que tardan los vehículos en llegar a la escena del incidente, midiendo con precisión la Latencia de Despacho y el Tiempo de Respuesta en Ruta.</p>
+      <p class="stage-desc mb-0"><strong>Optimización de vehiculos:</strong> Mantener un alto porcentaje de vehículos en estado 'Disponible' mediante el análisis predictivo de las alertas de telemetría.</p>
+      <p class="stage-desc mb-0"><strong>Análisis Geoespacial:</strong> Identificar zonas de alta densidad de incidentes mediante cálculos de proximidad (GEOGRAPHY) para redistribuir activos(vehiculos) de manera preventiva.</p>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-diagram-3-fill"></i></div>
+      <div class="stage-title mt-2">Componentes clave y datos recopilados</div>
+      <p class="stage-desc mb-0">El modelo de datos está diseñado para manejar la complejidad de la infraestructura de emergencia:</p>
+      <p class="stage-desc mb-0"><strong>- Grupo de Activos:</strong> Vehículos de Emergencia (Ambulancia, Patrulla, Carro de Bomberos) con sus respectivas bases (PropiedadesInstalacion).</p>
+      <p class="stage-desc mb-0"><strong>- Gestión de Turnos:</strong> Asignación de Usuarios (personal) a Vehiculos mediante la tabla PersonalVehiculo para mantener la trazabilidad de la tripulación.</p>
+    <p class="stage-desc mb-0"><strong>- Datos IoT de Alta Frecuencia:</strong> La telemetría se segmenta en dos flujos críticos:</p>
+    <ul class="stage-desc mb-0">
+      <li><strong>Ubicación (Series de Tiempo):</strong> Registros por segundo (MedicionesUbicacion) para reconstrucción de rutas y cálculos de proximidad.</li>
+      <li><strong>Eventos (Discretos):</strong> Alertas de fallas (Batería Baja, Código de Falla, Alerta de Temperatura) registradas en MedicionesTelemetricasEvento.</li>
+    </ul>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-cpu-fill"></i></div>
+      <div class="stage-title mt-2">Arquitectura de plataforma</div>
+      <p class="stage-desc mb-0"><strong>- Arquitectura de plataforma:</strong> La plataforma Flask sirve como portal para el consumidor final, mientras que el análisis es potenciado por SQL Server:</p>
+      <p class="stage-desc mb-0"><strong>- Ingesta (SQL Server MER):</strong> Datos brutos de IoT y transaccionales se almacenan en el Modelo Entidad-Relación para garantizar la integridad de la fuente.</p>
+      <p class="stage-desc mb-0"><strong>- Transformación (ETL/ELT):</strong> Los datos se limpian, se validan y se migran al Data Warehouse (Modelo Estrella/Copo de Nieve) para su análisis.</p>
+      <p class="stage-desc mb-0"><strong>- Visualización (Power BI):</strong> Los indicadores de rendimiento (KPIs) se consumen directamente del DW para generar tableros interactivos que permiten la toma de decisiones en tiempo real.</p>
+    </div>
+  </div>
+ </div>
+{% endblock %}
