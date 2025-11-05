@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Preparación de Datos · CRISP-DM{% endblock %}
+
+{% block content %}
+<section class="section-banner">
+  
+  <div class="section-banner-overlay"></div>
+  <div class="section-banner-content">
+    <div>
+      <h1>Preparación de Datos</h1>
+      <p class="lead">Limpieza, transformación y construcción de atributos para modelado.</p>
+    </div>
+  </div>
+</section>
+
+<div class="row g-3">
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-brush"></i></div>
+      <div class="stage-title mt-2">Limpieza</div>
+      <p class="stage-desc mb-0">Imputación de faltantes, deduplicación, normalización de valores y validación geotemporal.</p>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-sliders"></i></div>
+      <div class="stage-title mt-2">Transformación</div>
+      <p class="stage-desc mb-0">Escalado, codificación, agregaciones y joins de fuentes para datasets consistentes.</p>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="p-3 stage-card h-100">
+      <div class="stage-icon"><i class="bi bi-magic"></i></div>
+      <div class="stage-title mt-2">Atributos</div>
+      <p class="stage-desc mb-0">Features de tráfico, clima y urgencia para mejorar el desempeño de modelos.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
