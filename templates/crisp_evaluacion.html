@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block title %}Modelado y Evaluación · CRISP-DM{% endblock %}
+
+{% block content %}
+<section class="section-banner">
+  <div class="section-banner-overlay"></div>
+  <div class="section-banner-content">
+    <div>
+      <h1>Modelado y Evaluación</h1>
+      <p class="lead">Comparar modelos, medir desempeño y validar criterios de aceptación.</p>
+      <p class="lead">Arrastra el mouse por cada tarjeta para más información.</p>
+    </div>
+  </div>
+</section>
+
+<div class="row g-3 mt-4 text-center">
+  <!-- MODELOS -->
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="p-3 stage-card h-100" data-info="modelos-info">
+      <div class="stage-icon"><i class="bi bi-diagram-3"></i></div>
+      <div class="stage-title mt-2">Modelos</div>
+      <p class="stage-desc mb-0">Regresión, árboles, boosting y rutas óptimas; selección por desempeño y costo.</p>
+    </div>
+  </div>
+
+  <!-- MÉTRICAS -->
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="p-3 stage-card h-100" data-info="metricas-info">
+      <div class="stage-icon"><i class="bi bi-graph-up-arrow"></i></div>
+      <div class="stage-title mt-2">Métricas</div>
+      <p class="stage-desc mb-0">MAE/RMSE para ETA, exactitud de clasificación, cobertura y tiempos de respuesta.</p>
+    </div>
+  </div>
+
+  <!-- VALIDACIÓN -->
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="p-3 stage-card h-100" data-info="validacion-info">
+      <div class="stage-icon"><i class="bi bi-check2-circle"></i></div>
+      <div class="stage-title mt-2">Validación y Aceptación</div>
+      <p class="stage-desc mb-0">K-fold y pruebas fuera de muestra; umbrales operativos para despliegue.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MINI VENTANAS -->
+<div id="info-window" class="info-window">
+  <div class="info-content">
+    <span class="close-btn">&times;</span>
+    <div id="info-text"></div>
+  </div>
+</div>
+
+<style>
+.stage-card {
+  background: #181717;
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.stage-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+.info-window {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.info-content {
+  background: #fefefe;
+  border-radius: 16px;
+  max-width: 500px;
+  padding: 25px 30px;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  position: relative;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {transform: translateY(40px); opacity: 0;}
+  to {transform: translateY(0); opacity: 1;}
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s;
+}
+.close-btn:hover { color: #007bff; }
+
+#info-text {
+  margin-top: 10px;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+</style>
+
+<script>
+const infoTexts = {
+  "modelos-info": `
+    <h4>🤖 Modelos</h4>
+    <p>En esta fase se aplican diferentes técnicas de modelado, como regresión, árboles de decisión, bosques aleatorios y métodos de boosting. Cada modelo se ajusta utilizando los datos preparados y se compara su rendimiento.</p>
+    <p>El objetivo es identificar la mejor combinación entre precisión, velocidad de ejecución y facilidad de interpretación. Además, se consideran factores como el costo computacional y la adaptabilidad del modelo a nuevas condiciones.</p>
+  `,
+  "metricas-info": `
+    <h4>📈 Métricas</h4>
+    <p>Se utilizan indicadores de desempeño como el Error Absoluto Medio (MAE) y la Raíz del Error Cuadrático Medio (RMSE) para evaluar los tiempos estimados de llegada (ETA), junto con métricas de clasificación y cobertura.</p>
+    <p>Estas métricas permiten medir la capacidad predictiva y la robustez de los modelos, asegurando que las predicciones sean estables y consistentes ante distintos escenarios operativos.</p>
+  `,
+  "validacion-info": `
+    <h4>✅ Validación y Aceptación</h4>
+    <p>Se aplican técnicas de validación cruzada, como K-Fold, y pruebas fuera de muestra para evaluar el comportamiento real del modelo ante nuevos datos. Esta validación asegura que el modelo no esté sobreajustado.</p>
+    <p>Finalmente, se establecen umbrales operativos y criterios de aceptación basados en los objetivos del negocio, determinando si el modelo está listo para su implementación en entornos reales.</p>
+  `
+};
+
+document.querySelectorAll('.stage-card').forEach(card => {
+  card.addEventListener('mouseenter', e => {
+    const id = card.getAttribute('data-info');
+    const infoWindow = document.getElementById('info-window');
+    document.getElementById('info-text').innerHTML = infoTexts[id];
+    infoWindow.style.display = 'flex';
+  });
+});
+
+document.querySelector('.close-btn').addEventListener('click', () => {
+  document.getElementById('info-window').style.display = 'none';
+});
+
+document.getElementById('info-window').addEventListener('click', e => {
+  if (e.target.id === 'info-window') {
+    e.currentTarget.style.display = 'none';
+  }
+});
+</script>
+
+{% endblock %}
