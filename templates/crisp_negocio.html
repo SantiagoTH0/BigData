@@ -4,37 +4,176 @@
 
 {% block content %}
 <section class="section-banner">
-  
   <div class="section-banner-overlay"></div>
   <div class="section-banner-content">
     <div>
       <h1>Comprensión del Negocio</h1>
-      <p class="lead">Alinear objetivos operativos con impacto en respuesta a emergencias.</p>
+      <p class="lead">Alinear los objetivos estratégicos y operativos en la gestión de emergencias.</p>
+      <p class="lead">Pasa el cursor sobre cada tarjeta para conocer los detalles ampliados.</p>
     </div>
   </div>
 </section>
 
-<div class="row g-3">
+<div class="row g-3 mt-4 text-center">
+  <!-- OBJETIVOS ESTRATÉGICOS -->
   <div class="col-12 col-md-6 col-lg-4">
-    <div class="p-3 stage-card h-100">
+    <div class="p-3 stage-card h-100" data-info="objetivos-info">
       <div class="stage-icon"><i class="bi bi-bullseye"></i></div>
-      <div class="stage-title mt-2">Objetivos estratégicos</div>
-      <p class="stage-desc mb-0">Reducir tiempos de llegada, optimizar rutas, incrementar cobertura y seguridad del personal.</p>
+      <div class="stage-title mt-2">Objetivos Estratégicos</div>
+      <p class="stage-desc mb-0">Reducir tiempos de llegada, optimizar rutas y aumentar la cobertura.</p>
     </div>
   </div>
+
+  <!-- INDICADORES -->
   <div class="col-12 col-md-6 col-lg-4">
-    <div class="p-3 stage-card h-100">
+    <div class="p-3 stage-card h-100" data-info="indicadores-info">
       <div class="stage-icon"><i class="bi bi-speedometer2"></i></div>
       <div class="stage-title mt-2">Indicadores (KPIs)</div>
-      <p class="stage-desc mb-0">Tiempo de respuesta, tasa de éxito, disponibilidad de unidades, cumplimiento de protocolos.</p>
+      <p class="stage-desc mb-0">Medición de desempeño, efectividad operativa y cumplimiento de protocolos.</p>
     </div>
   </div>
+
+  <!-- ACTORES CLAVE -->
   <div class="col-12 col-md-6 col-lg-4">
-    <div class="p-3 stage-card h-100">
-      <div class="stage-icon"><i class="bi bi-people-fill"></i></div>
-      <div class="stage-title mt-2">Actores clave</div>
-      <p class="stage-desc mb-0">Bomberos, ambulancias, policía, centro de control, tránsito y hospitales.</p>
+    <div class="p-3 stage-card h-100" data-info="actores-info">
+      <div class="stage-icon"><i class="bi bi-people"></i></div>
+      <div class="stage-title mt-2">Actores Clave</div>
+      <p class="stage-desc mb-0">Instituciones involucradas en la atención y gestión de emergencias.</p>
     </div>
   </div>
 </div>
+
+<!-- VENTANA EMERGENTE -->
+<div id="info-window" class="info-window">
+  <div class="info-content">
+    <span class="close-btn">&times;</span>
+    <div id="info-text"></div>
+  </div>
+</div>
+
+<style>
+/* Tarjetas */
+.stage-card {
+  background: #181717;
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.stage-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+}
+
+/* Ventana emergente */
+.info-window {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease forwards;
+}
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+.info-content {
+  background: #fefefe;
+  border-radius: 16px;
+  max-width: 650px;
+  padding: 30px 35px;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  position: relative;
+  animation: slideUp 0.4s ease;
+}
+@keyframes slideUp {
+  from {transform: translateY(40px); opacity: 0;}
+  to {transform: translateY(0); opacity: 1;}
+}
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s;
+}
+.close-btn:hover { color: #007bff; }
+
+#info-text {
+  margin-top: 10px;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+</style>
+
+<script>
+const infoTexts = {
+  "objetivos-info": `
+    <h4>🎯 Objetivos Estratégicos</h4>
+    <p>El propósito fundamental de la fase de Comprensión del Negocio es definir con claridad los objetivos operativos y estratégicos que guiarán todo el proceso analítico. 
+    En el contexto de la gestión de vehículos de emergencia, los objetivos buscan maximizar la eficiencia de respuesta ante incidentes críticos y reducir los tiempos de atención.</p>
+    <ul>
+      <li><strong>Reducir tiempos de llegada:</strong> mediante optimización de rutas, priorización dinámica y análisis de tráfico en tiempo real.</li>
+      <li><strong>Optimizar recursos:</strong> mediante la asignación inteligente de unidades según la demanda geográfica y temporal.</li>
+      <li><strong>Incrementar cobertura:</strong> garantizando presencia operativa en áreas de alto riesgo o difícil acceso.</li>
+      <li><strong>Mejorar seguridad:</strong> asegurando protocolos de actuación y comunicación entre entidades.</li>
+      <li><strong>Planificar de forma predictiva:</strong> utilizando datos históricos y patrones recurrentes para anticipar emergencias.</li>
+  `,
+
+  "indicadores-info": `
+    <h4>📊 Indicadores de Desempeño (KPIs)</h4>
+    <p>Los indicadores son las métricas que permiten evaluar el grado de cumplimiento de los objetivos establecidos. En el proyecto de respuesta a emergencias, los KPIs están diseñados para medir eficiencia, efectividad y calidad operativa.</p>
+    <ul>
+      <li><strong>Tiempo promedio de respuesta:</strong> intervalo entre la alerta y la llegada de la unidad al sitio del incidente.</li>
+      <li><strong>Tasa de éxito:</strong> porcentaje de incidentes atendidos dentro de los tiempos y condiciones establecidos.</li>
+      <li><strong>Disponibilidad de unidades:</strong> proporción de vehículos operativos respecto al total de la flota.</li>
+      <li><strong>Cumplimiento de protocolos:</strong> nivel de adherencia a los procedimientos de despacho, comunicación y atención.</li>
+      <li><strong>Coste operativo por evento:</strong> eficiencia económica basada en el uso de combustible, mantenimiento y personal.</li>
+    </ul>
+    <p>El seguimiento constante de estos indicadores permite ajustar estrategias, priorizar recursos y establecer líneas base de mejora continua en los procesos de atención de emergencias.</p>
+  `,
+
+  "actores-info": `
+    <h4>👥 Actores Clave</h4>
+    <p>El ecosistema de respuesta a emergencias involucra a una red de instituciones y actores que deben coordinarse para garantizar una atención efectiva y oportuna. Cada actor cumple un rol estratégico en la cadena de valor del proceso operativo.</p>
+    <ul>
+      <li><strong>Bomberos:</strong> atención inmediata de incendios, rescates y emergencias técnicas.</li>
+      <li><strong>Ambulancias y personal médico:</strong> asistencia prehospitalaria y traslado seguro de pacientes.</li>
+      <li><strong>Policía y tránsito:</strong> control de vías, aseguramiento del área y acompañamiento operativo.</li>
+      <li><strong>Centros de control:</strong> monitoreo en tiempo real, priorización de eventos y coordinación interinstitucional.</li>
+    </ul>
+    <p>La colaboración entre estos actores, apoyada por sistemas integrados de información y análisis de datos, reduce los tiempos de respuesta y mejora la capacidad de decisión operativa en escenarios de alta complejidad.</p>
+  `
+};
+
+// Mostrar ventana al pasar el mouse
+document.querySelectorAll('.stage-card').forEach(card => {
+  card.addEventListener('mouseenter', e => {
+    const id = card.getAttribute('data-info');
+    const infoWindow = document.getElementById('info-window');
+    document.getElementById('info-text').innerHTML = infoTexts[id];
+    infoWindow.style.display = 'flex';
+  });
+});
+
+// Cerrar ventana
+document.querySelector('.close-btn').addEventListener('click', () => {
+  document.getElementById('info-window').style.display = 'none';
+});
+
+// Cerrar al hacer clic fuera
+document.getElementById('info-window').addEventListener('click', e => {
+  if (e.target.id === 'info-window') {
+    e.currentTarget.style.display = 'none';
+  }
+});
+</script>
+
 {% endblock %}

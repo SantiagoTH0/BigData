@@ -4,37 +4,163 @@
 
 {% block content %}
 <section class="section-banner">
+<<<<<<< HEAD
+=======
   
+>>>>>>> origin/main
   <div class="section-banner-overlay"></div>
   <div class="section-banner-content">
     <div>
       <h1>Preparación de Datos</h1>
       <p class="lead">Limpieza, transformación y construcción de atributos para modelado.</p>
+      <p class="lead">Arrastrar el mouse por cada tarjeta para más información.</p>
     </div>
   </div>
 </section>
 
-<div class="row g-3">
+<div class="row g-3 mt-4 text-center">
+  <!-- LIMPIEZA -->
   <div class="col-12 col-md-6 col-lg-4">
-    <div class="p-3 stage-card h-100">
+    <div class="p-3 stage-card h-100" data-info="limpieza-info">
       <div class="stage-icon"><i class="bi bi-brush"></i></div>
       <div class="stage-title mt-2">Limpieza</div>
-      <p class="stage-desc mb-0">Imputación de faltantes, deduplicación, normalización de valores y validación geotemporal.</p>
+      <p class="stage-desc mb-0">Depuración de registros operativos (bitácoras, GPS y tráfico).</p>
     </div>
   </div>
+
+  <!-- TRANSFORMACIÓN -->
   <div class="col-12 col-md-6 col-lg-4">
-    <div class="p-3 stage-card h-100">
+    <div class="p-3 stage-card h-100" data-info="transformacion-info">
       <div class="stage-icon"><i class="bi bi-sliders"></i></div>
       <div class="stage-title mt-2">Transformación</div>
-      <p class="stage-desc mb-0">Escalado, codificación, agregaciones y joins de fuentes para datasets consistentes.</p>
+      <p class="stage-desc mb-0">Escalado, codificación y combinación de fuentes de datos.</p>
     </div>
   </div>
+
+  <!-- ATRIBUTOS -->
   <div class="col-12 col-md-6 col-lg-4">
-    <div class="p-3 stage-card h-100">
+    <div class="p-3 stage-card h-100" data-info="atributos-info">
       <div class="stage-icon"><i class="bi bi-magic"></i></div>
       <div class="stage-title mt-2">Atributos</div>
-      <p class="stage-desc mb-0">Features de tráfico, clima y urgencia para mejorar el desempeño de modelos.</p>
+      <p class="stage-desc mb-0">Variables derivadas de tráfico, emergencia y tipo de urgencia.</p>
     </div>
   </div>
 </div>
+
+<!-- MINI VENTANAS -->
+<div id="info-window" class="info-window">
+  <div class="info-content">
+    <span class="close-btn">&times;</span>
+    <div id="info-text"></div>
+  </div>
+</div>
+
+<style>
+/* Tarjetas principales */
+.stage-card {
+  background: #181717;
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.stage-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+/* Ventana emergente */
+.info-window {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.info-content {
+  background: #fefefe;
+  border-radius: 16px;
+  max-width: 500px;
+  padding: 25px 30px;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  position: relative;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {transform: translateY(40px); opacity: 0;}
+  to {transform: translateY(0); opacity: 1;}
+}
+
+/* Botón de cierre */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s;
+}
+.close-btn:hover { color: #007bff; }
+
+/* Texto dentro de la ventana */
+#info-text {
+  margin-top: 10px;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+</style>
+
+<script>
+// Contenido de cada ventana
+const infoTexts = {
+  "limpieza-info": `
+    <h4>🧹 Limpieza de Datos</h4>
+    <p>Se eliminaron registros duplicados, valores nulos y errores de digitación en las fuentes operativas, asegurando coherencia temporal y geográfica entre datos de tráfico o emergencias.</p>
+    <p>Además, se estandarizaron los formatos de fecha, hora y coordenadas geográficas, y se depuraron inconsistencias como nombres mal escritos o valores fuera de rango. Este proceso reduce el ruido y mejora la calidad general de los datos utilizados en el modelado.</p>
+  `,
+  "transformacion-info": `
+    <h4>⚙️ Transformación</h4>
+    <p>Se aplicaron técnicas de escalado y codificación de variables categóricas, junto con la integración de múltiples fuentes (GPS, sensores o reportes ciudadanos), lo que permite generar un conjunto de datos homogéneo y comparable.</p>
+    <p>También se transformaron unidades de medida (por ejemplo, de metros a kilómetros), se normalizaron valores numéricos para evitar sesgos en los algoritmos, y se ajustaron las variables temporales para analizar comportamientos por hora, día o año.</p>
+  `,
+  "atributos-info": `
+    <h4>✨ Atributos Derivados</h4>
+    <p>Se construyeron nuevas características como el flujo vehicular promedio, variaciones en los tiempos de respuesta de vehículos de emergencia y la frecuencia de incidentes por zona o tipo de evento.</p>
+    <p>Estos atributos enriquecen el conjunto de datos, aportando contexto y relaciones útiles para los modelos predictivos. Esto ayuda a mejorar la capacidad explicativa y de predicción del sistema.</p>
+  `
+};
+
+document.querySelectorAll('.stage-card').forEach(card => {
+  card.addEventListener('mouseenter', e => {
+    const id = card.getAttribute('data-info');
+    const infoWindow = document.getElementById('info-window');
+    document.getElementById('info-text').innerHTML = infoTexts[id];
+    infoWindow.style.display = 'flex';
+  });
+});
+
+document.querySelector('.close-btn').addEventListener('click', () => {
+  document.getElementById('info-window').style.display = 'none';
+});
+
+document.getElementById('info-window').addEventListener('click', e => {
+  if (e.target.id === 'info-window') {
+    e.currentTarget.style.display = 'none';
+  }
+});
+</script>
+
 {% endblock %}

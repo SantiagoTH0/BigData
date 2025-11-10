@@ -4,37 +4,157 @@
 
 {% block content %}
 <section class="section-banner">
-  
   <div class="section-banner-overlay"></div>
   <div class="section-banner-content">
     <div>
       <h1>Comprensión de los Datos</h1>
       <p class="lead">Catalogar fuentes, evaluar calidad y descubrir patrones clave.</p>
+      <p class="lead">Arrastra el mouse por cada tarjeta para más información.</p>
     </div>
   </div>
 </section>
 
-<div class="row g-3">
+<div class="row g-3 mt-4 text-center">
+  <!-- FUENTES -->
   <div class="col-12 col-md-6 col-lg-4">
-    <div class="p-3 stage-card h-100">
+    <div class="p-3 stage-card h-100" data-info="fuentes-info">
       <div class="stage-icon"><i class="bi bi-map"></i></div>
       <div class="stage-title mt-2">Fuentes</div>
-      <p class="stage-desc mb-0">GPS de unidades, incidentes, tráfico, clima, disponibilidad hospitalaria y reportes ciudadanos.</p>
+      <p class="stage-desc mb-0">GPS de unidades, incidentes, tráfico, disponibilidad y reportes ciudadanos.</p>
     </div>
   </div>
+
+  <!-- CALIDAD -->
   <div class="col-12 col-md-6 col-lg-4">
-    <div class="p-3 stage-card h-100">
+    <div class="p-3 stage-card h-100" data-info="calidad-info">
       <div class="stage-icon"><i class="bi bi-shield-check"></i></div>
       <div class="stage-title mt-2">Calidad</div>
       <p class="stage-desc mb-0">Completitud, consistencia, validez temporal y geográfica; detección de outliers y duplicados.</p>
     </div>
   </div>
+
+  <!-- EXPLORACIÓN -->
   <div class="col-12 col-md-6 col-lg-4">
-    <div class="p-3 stage-card h-100">
+    <div class="p-3 stage-card h-100" data-info="exploracion-info">
       <div class="stage-icon"><i class="bi bi-bar-chart-fill"></i></div>
       <div class="stage-title mt-2">Exploración</div>
       <p class="stage-desc mb-0">Distribuciones, correlaciones y series temporales para orientar preparación y modelado.</p>
     </div>
   </div>
 </div>
+
+<!-- MINI VENTANAS -->
+<div id="info-window" class="info-window">
+  <div class="info-content">
+    <span class="close-btn">&times;</span>
+    <div id="info-text"></div>
+  </div>
+</div>
+
+<style>
+.stage-card {
+  background: #181717;
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.stage-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+.info-window {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.info-content {
+  background: #fefefe;
+  border-radius: 16px;
+  max-width: 500px;
+  padding: 25px 30px;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  position: relative;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {transform: translateY(40px); opacity: 0;}
+  to {transform: translateY(0); opacity: 1;}
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s;
+}
+.close-btn:hover { color: #007bff; }
+
+#info-text {
+  margin-top: 10px;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+</style>
+
+<script>
+const infoTexts = {
+  "fuentes-info": `
+    <h4>🗺️ Fuentes de Datos</h4>
+    <p>Se recopilaron datos desde múltiples fuentes: GPS de unidades de emergencia, tráfico, disponibilidad y reportes ciudadanos. Cada conjunto fue validado y clasificado para garantizar su utilidad analítica.</p>
+    <p>La integración de estas fuentes permite obtener una buena visión del entorno operativo. Al combinar información en tiempo real con registros históricos, se pueden identificar patrones de comportamiento y zonas críticas con mayor precisión.</p>
+    <p>Además, la variedad de los orígenes de los datos facilita un análisis más completo, reduciendo los sesgos que podrían aparecer si se dependiera de una sola fuente.</p>
+  `,
+  "calidad-info": `
+    <h4>✅ Calidad de Datos</h4>
+    <p>Se evaluó la completitud, consistencia y validez de los datos. Se identificaron valores atípicos, inconsistencias geográficas y duplicados, corrigiendo y depurando registros para asegurar precisión en el modelado.</p>
+    <p>Este proceso de control de calidad garantiza que los resultados derivados del análisis sean confiables y representativos. Además, se establecieron métricas de control para detectar futuras anomalías y mantener la integridad de los datos.</p>
+    <p>El trabajo con datos limpios no solo mejora la exactitud de los modelos predictivos, sino que también reduce el tiempo de procesamiento en las etapas posteriores del ciclo de vida del análisis.</p>
+  `,
+  "exploracion-info": `
+    <h4>📊 Exploración de Datos</h4>
+    <p>Se realizaron análisis exploratorios para identificar correlaciones, distribuciones y tendencias en el tiempo. Esto permitió detectar patrones que orientan las siguientes fases de preparación y modelado.</p>
+    <p>Durante la exploración, se emplearon visualizaciones para observar relaciones entre variables clave y comprender el comportamiento de los datos ante distintas condiciones externas.</p>
+    <p>Los hallazgos obtenidos en esta etapa permiten descubrir nuevas oportunidades de análisis, comprender mejor la dinámica de las emergencias y ajustar hipótesis de trabajo antes de construir los modelos predictivos.</p>
+  `
+};
+
+document.querySelectorAll('.stage-card').forEach(card => {
+  card.addEventListener('mouseenter', e => {
+    const id = card.getAttribute('data-info');
+    const infoWindow = document.getElementById('info-window');
+    document.getElementById('info-text').innerHTML = infoTexts[id];
+    infoWindow.style.display = 'flex';
+  });
+});
+
+document.querySelector('.close-btn').addEventListener('click', () => {
+  document.getElementById('info-window').style.display = 'none';
+});
+
+document.getElementById('info-window').addEventListener('click', e => {
+  if (e.target.id === 'info-window') {
+    e.currentTarget.style.display = 'none';
+  }
+});
+</script>
+
 {% endblock %}
