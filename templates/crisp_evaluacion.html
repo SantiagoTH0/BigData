@@ -9,7 +9,7 @@
     <div>
       <h1>Modelado y Evaluación</h1>
       <p class="lead">Comparar modelos, medir desempeño y validar criterios de aceptación.</p>
-      <p class="lead">Arrastra el mouse por cada tarjeta para más información.</p>
+      <p class="lead">Haz clic en cada tarjeta para más información.</p>
     </div>
   </div>
 </section>
@@ -135,7 +135,7 @@ const infoTexts = {
 };
 
 document.querySelectorAll('.stage-card').forEach(card => {
-  card.addEventListener('mouseenter', e => {
+  card.addEventListener('click', e => {
     const id = card.getAttribute('data-info');
     const infoWindow = document.getElementById('info-window');
     document.getElementById('info-text').innerHTML = infoTexts[id];

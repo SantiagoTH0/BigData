@@ -9,7 +9,7 @@
     <div>
       <h1>Comprensión de los Datos</h1>
       <p class="lead">Catalogar fuentes, evaluar calidad y descubrir patrones clave.</p>
-      <p class="lead">Arrastra el mouse por cada tarjeta para más información.</p>
+      <p class="lead">Haz clic en cada tarjeta para más información.</p>
     </div>
   </div>
 </section>
@@ -138,11 +138,11 @@ const infoTexts = {
 };
 
 document.querySelectorAll('.stage-card').forEach(card => {
-  card.addEventListener('mouseenter', e => {
-    const id = card.getAttribute('data-info');
-    const infoWindow = document.getElementById('info-window');
-    document.getElementById('info-text').innerHTML = infoTexts[id];
-    infoWindow.style.display = 'flex';
+  card.addEventListener('click', e => {
+      const id = card.getAttribute('data-info');
+      const infoWindow = document.getElementById('info-window');
+      document.getElementById('info-text').innerHTML = infoTexts[id];
+      infoWindow.style.display = 'flex';
   });
 });
 
