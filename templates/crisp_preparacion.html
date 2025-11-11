@@ -3,20 +3,18 @@
 {% block title %}Preparación de Datos · CRISP-DM{% endblock %}
 
 {% block content %}
+<!-- Inicio de la sección del banner en Preparación de Datos -->
 <section class="section-banner">
-<<<<<<< HEAD
-=======
-  
->>>>>>> origin/main
   <div class="section-banner-overlay"></div>
   <div class="section-banner-content">
     <div>
       <h1>Preparación de Datos</h1>
       <p class="lead">Limpieza, transformación y construcción de atributos para modelado.</p>
-      <p class="lead">Arrastrar el mouse por cada tarjeta para más información.</p>
+      <p class="lead">Haz clic en cada tarjeta para más información.</p>
     </div>
   </div>
 </section>
+<!-- Fin de la sección del banner -->
 
 <div class="row g-3 mt-4 text-center">
   <!-- LIMPIEZA -->
@@ -144,12 +142,12 @@ const infoTexts = {
 };
 
 document.querySelectorAll('.stage-card').forEach(card => {
-  card.addEventListener('mouseenter', e => {
-    const id = card.getAttribute('data-info');
-    const infoWindow = document.getElementById('info-window');
-    document.getElementById('info-text').innerHTML = infoTexts[id];
-    infoWindow.style.display = 'flex';
-  });
+    card.addEventListener('click', e => {
+        const id = card.getAttribute('data-info');
+        const infoWindow = document.getElementById('info-window');
+        document.getElementById('info-text').innerHTML = infoTexts[id];
+        infoWindow.style.display = 'flex';
+    });
 });
 
 document.querySelector('.close-btn').addEventListener('click', () => {

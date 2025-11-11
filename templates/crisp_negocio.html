@@ -9,7 +9,7 @@
     <div>
       <h1>Comprensión del Negocio</h1>
       <p class="lead">Alinear los objetivos estratégicos y operativos en la gestión de emergencias.</p>
-      <p class="lead">Pasa el cursor sobre cada tarjeta para conocer los detalles ampliados.</p>
+      <p class="lead">Haz clic en cada tarjeta para conocer los detalles ampliados.</p>
     </div>
   </div>
 </section>
@@ -155,12 +155,12 @@ const infoTexts = {
 
 // Mostrar ventana al pasar el mouse
 document.querySelectorAll('.stage-card').forEach(card => {
-  card.addEventListener('mouseenter', e => {
-    const id = card.getAttribute('data-info');
-    const infoWindow = document.getElementById('info-window');
-    document.getElementById('info-text').innerHTML = infoTexts[id];
-    infoWindow.style.display = 'flex';
-  });
+    card.addEventListener('click', e => {
+        const id = card.getAttribute('data-info');
+        const infoWindow = document.getElementById('info-window');
+        document.getElementById('info-text').innerHTML = infoTexts[id];
+        infoWindow.style.display = 'flex';
+    });
 });
 
 // Cerrar ventana

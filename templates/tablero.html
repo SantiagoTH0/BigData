@@ -14,38 +14,85 @@
   </div>
 </section>
 
-<div class="report-embed mb-3">
-  <div>
-    <i class="bi bi-bar-chart-fill" style="font-size:1.6rem;"></i>
-    <p class="mt-2 mb-0">Aquí se incrustará el informe de Power BI (iframe/publicación).</p>
-  </div>
-  <!-- Ejemplo de iframe (reemplazar src con URL pública cuando esté disponible) -->
-  <!--
-  <iframe src="https://app.powerbi.com/view?r=YOUR_PUBLIC_REPORT_ID" style="width:100%; height:100%; border:0; border-radius:14px;" allowfullscreen></iframe>
-  -->
+<div class="d-flex gap-2 report-switcher mb-3">
+  <button class="switch-btn active" data-key="respuesta"><i class="bi bi-speedometer2"></i> Rendimiento Operacional</button>
+  <button class="switch-btn" data-key="cobertura"><i class="bi bi-geo-alt"></i> Análisis de recursos</button>
+  <button class="switch-btn" data-key="impacto"><i class="bi bi-heart-pulse"></i> Análisis de Usuarios y Dispositivos</button>
 </div>
 
-<div class="row g-3">
-  <div class="col-12 col-md-4">
-    <div class="p-3 stage-card h-100">
-      <div class="stage-icon"><i class="bi bi-speedometer2"></i></div>
-      <div class="stage-title mt-2">Tiempo de respuesta</div>
-      <p class="stage-desc mb-0">Promedio por zona y tipo de incidente; distribución y tendencias.</p>
-    </div>
-  </div>
-  <div class="col-12 col-md-4">
-    <div class="p-3 stage-card h-100">
-      <div class="stage-icon"><i class="bi bi-geo-alt"></i></div>
-      <div class="stage-title mt-2">Cobertura</div>
-      <p class="stage-desc mb-0">Mapa de disponibilidad de unidades y demanda estimada por horario.</p>
-    </div>
-  </div>
-  <div class="col-12 col-md-4">
-    <div class="p-3 stage-card h-100">
-      <div class="stage-icon"><i class="bi bi-heart-pulse"></i></div>
-      <div class="stage-title mt-2">Impacto</div>
-      <p class="stage-desc mb-0">Indicadores de eficacia operativa y reducción de demoras críticas.</p>
-    </div>
+<div class="report-embed p-2 mb-2">
+  <div class="embed-container">
+    <iframe id="biFrame" src="https://app.powerbi.com/view?r=eyJrIjoiMmMyYjY4YTItZGQ1MS00ODZhLWI4M2YtYmRiY2I0ZTAxNDg0IiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9&pageName=6a1eb2fcf1c08318e7c9" title="Power BI" allowfullscreen loading="lazy"></iframe>
   </div>
 </div>
+
+<div id="biDescription" class="p-3 stage-card">
+  <div class="stage-icon"><i class="bi bi-speedometer2"></i></div>
+  <div class="stage-title mt-2">Rendimiento Operacional</div>
+  <div class="stage-desc mb-0">
+    <p><strong>Emergencia por prioridad:</strong> Muestra la distribución de las emergencias clasificadas por su tipo y prioridad y ayuda a identificar que tipos y prioridades son más frecuentes y generan la mayor carga de trabajo y dónde se encuentra la demanda de recursos más urgente.</p>
+    <p><strong>Tiempo promedio de respuesta:</strong> Muestra el promedio de tiempo, en minutos, transcurrido desde que se reporta una emergencia hasta la llegada de la primera unidad. Un valor bajo indica una alta eficiencia operativa, mientras que un valor alto señala posibles cuellos de botella en la asignación o el desplazamiento de vehículos.</p>
+    <p><strong>Tendencia de emergencias:</strong> Muestra la evolución del volumen de emergencias a lo largo del tiempo. Es fundamental para detectar patrones estacionales (más accidentes en ciertas horas del día) y tendencias a largo plazo. Permite al equipo de planificación anticipar picos de demanda y ajustar la disponibilidad del personal.</p>
+    <p><strong>Emergencias por base de instalación:</strong> Este mapa geográfico utiliza burbujas cuyo tamaño representa la cantidad total de emergencias gestionadas por cada Base de Instalación. Permite una evaluación geográfica visual para identificar las bases más activas (las que tienen la mayor carga de trabajo) y las áreas de la ciudad con mayor densidad de incidentes, lo que informa decisiones de reubicación o apertura de nuevas bases.</p>
+  </div>
+  
+</div>
+
+<script>
+  const boards = {
+    respuesta: {
+      src: 'https://app.powerbi.com/view?r=eyJrIjoiMmMyYjY4YTItZGQ1MS00ODZhLWI4M2YtYmRiY2I0ZTAxNDg0IiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9&pageName=6a1eb2fcf1c08318e7c9',
+      icon: 'bi-speedometer2',
+      title: 'Rendimiento Operacional',
+      desc: `
+        <p><strong>Emergencia por prioridad:</strong> Muestra la distribución de las emergencias clasificadas por su tipo y prioridad y ayuda a identificar que tipos y prioridades son más frecuentes y generan la mayor carga de trabajo y dónde se encuentra la demanda de recursos más urgente.</p>
+        <p><strong>Tiempo promedio de respuesta:</strong> Muestra el promedio de tiempo, en minutos, transcurrido desde que se reporta una emergencia hasta la llegada de la primera unidad. Un valor bajo indica una alta eficiencia operativa, mientras que un valor alto señala posibles cuellos de botella en la asignación o el desplazamiento de vehículos.</p>
+        <p><strong>Tendencia de emergencias:</strong> Muestra la evolución del volumen de emergencias a lo largo del tiempo. Es fundamental para detectar patrones estacionales (más accidentes en ciertas horas del día) y tendencias a largo plazo. Permite al equipo de planificación anticipar picos de demanda y ajustar la disponibilidad del personal.</p>
+        <p><strong>Emergencias por base de instalación:</strong> Este mapa geográfico utiliza burbujas cuyo tamaño representa la cantidad total de emergencias gestionadas por cada Base de Instalación. Permite una evaluación geográfica visual para identificar las bases más activas (las que tienen la mayor carga de trabajo) y las áreas de la ciudad con mayor densidad de incidentes, lo que informa decisiones de reubicación o apertura de nuevas bases.</p>
+      `
+    },
+    cobertura: {
+      src: 'https://app.powerbi.com/view?r=eyJrIjoiMmMyYjY4YTItZGQ1MS00ODZhLWI4M2YtYmRiY2I0ZTAxNDg0IiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9&pageName=56d3031d9abb96425726',
+      icon: 'bi-geo-alt',
+      title: 'Análisis de recursos',
+      desc: `
+        <p><strong>Distribución de Vehículos Asignados:</strong> Muestra la proporción y el número de emergencias que fueron atendidas por cada Tipo de Vehículo (Ambulancia, Patrulla, Carro de Bomberos). Es vital para evaluar si la combinación de vehículos desplegada se alinea con la tipología de las emergencias que se presentan con mayor frecuencia.</p>
+        <p><strong>Capacidad de Personal por Tipo de Vehículo:</strong> Indica la capacidad promedio de personal que puede transportar cada tipo de vehículo. Esta métrica se utiliza para validar la dotación mínima requerida en las asignaciones de emergencia y asegurar que los vehículos están siendo utilizados con la tripulación adecuada para su capacidad.</p>
+        <p><strong>Emergencias por Estado Actual del Vehículo:</strong> Muestra el conteo de hechos clasificado según el Estado Actual del vehículo al momento de la asignación (Disponible, En Ruta, En Incidente, Mantenimiento). Permite analizar la disponibilidad real de los vehículos e identificar qué porcentaje de incidentes fueron atendidos por vehículos que ya estaban ocupados o en ruta.</p>
+        <p><strong>Eventos por Sensor y Unidad de Medida:</strong> Detalla la cantidad de eventos generados, clasificados por el Sensor que los reportó (ej. Sensor de Temperatura, Sensor de Presión) y su Unidad de Medida. Este gráfico es esencial para el equipo de Mantenimiento y Calidad de Datos, ya que valida la actividad y fiabilidad de la infraestructura de monitoreo (IoT).</p>
+      `
+    },
+    impacto: {
+      src: 'https://app.powerbi.com/view?r=eyJrIjoiMmMyYjY4YTItZGQ1MS00ODZhLWI4M2YtYmRiY2I0ZTAxNDg0IiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9&pageName=928955e94ff9710bbdf7',
+      icon: 'bi-heart-pulse',
+      title: 'Análisis de Usuarios y Dispositivos',
+      desc: `
+        <p><strong>Emergencias Asignadas por Usuario:</strong> Muestra la carga de trabajo, indicando cuántas emergencias fueron asignadas o gestionadas por cada Usuario u Operador. Es una herramienta de gestión de personal para identificar a los operadores más productivos o, alternativamente, aquellos que requieren apoyo o redistribución de tareas.</p>
+        <p><strong>Antigüedad de Instalación de Dispositivos:</strong> Es una tabla de referencia que muestra la Fecha de Instalación y el tiempo transcurrido (Antigüedad) de cada Dispositivo de Monitoreo/Reporte. Es utilizado por el equipo de Activos Fijos para planificar y programar el mantenimiento preventivo y la sustitución de equipos antiguos.</p>
+        <p><strong>Emergencias Reportadas por Código:</strong> Proporciona un desglose detallado de los incidentes por su Descripción de Emergencia y su Código Único. La matriz permite al usuario auditar el volumen exacto de cada tipo específico de incidente, siendo útil para informes regulatorios y análisis de riesgos detallado.</p>
+      `
+    }
+  };
+  const frame = document.getElementById('biFrame');
+  const desc = document.getElementById('biDescription');
+  const iconEl = desc.querySelector('.stage-icon i');
+  const titleEl = desc.querySelector('.stage-title');
+  const textEl = desc.querySelector('.stage-desc');
+  document.querySelectorAll('.switch-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const key = btn.getAttribute('data-key');
+      const b = boards[key];
+      const baseSrc = b.src.trim().replace(/`/g, '');
+      const sep = baseSrc.includes('?') ? '&' : '?';
+      frame.src = `${baseSrc}${sep}ts=${Date.now()}`;
+      iconEl.className = `bi ${b.icon}`;
+      titleEl.textContent = b.title;
+      textEl.innerHTML = b.desc;
+    });
+  });
+</script>
+
+<!-- Las descripciones ahora están colocadas debajo de cada tablero -->
 {% endblock %}
