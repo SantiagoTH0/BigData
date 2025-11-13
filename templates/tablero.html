@@ -17,7 +17,8 @@
 <div class="d-flex gap-2 report-switcher mb-3">
   <button class="switch-btn active" data-key="respuesta"><i class="bi bi-speedometer2"></i> Rendimiento Operacional</button>
   <button class="switch-btn" data-key="cobertura"><i class="bi bi-geo-alt"></i> Análisis de recursos</button>
-  <button class="switch-btn" data-key="impacto"><i class="bi bi-heart-pulse"></i> Análisis de Usuarios y Dispositivos</button>
+  <button class="switch-btn" data-key="detallado"><i class="bi bi-card-list"></i> Análisis detallado</button>
+  <button class="switch-btn" data-key="impacto"><i class="bi bi-heart-pulse"></i> Tendencias temporales</button>
 </div>
 
 <div class="report-embed p-2 mb-2">
@@ -32,7 +33,6 @@
   <div class="stage-desc mb-0">
     <p><strong>Emergencia por prioridad:</strong> Muestra la distribución de las emergencias clasificadas por su tipo y prioridad y ayuda a identificar que tipos y prioridades son más frecuentes y generan la mayor carga de trabajo y dónde se encuentra la demanda de recursos más urgente.</p>
     <p><strong>Tiempo promedio de respuesta:</strong> Muestra el promedio de tiempo, en minutos, transcurrido desde que se reporta una emergencia hasta la llegada de la primera unidad. Un valor bajo indica una alta eficiencia operativa, mientras que un valor alto señala posibles cuellos de botella en la asignación o el desplazamiento de vehículos.</p>
-    <p><strong>Tendencia de emergencias:</strong> Muestra la evolución del volumen de emergencias a lo largo del tiempo. Es fundamental para detectar patrones estacionales (más accidentes en ciertas horas del día) y tendencias a largo plazo. Permite al equipo de planificación anticipar picos de demanda y ajustar la disponibilidad del personal.</p>
     <p><strong>Emergencias por base de instalación:</strong> Este mapa geográfico utiliza burbujas cuyo tamaño representa la cantidad total de emergencias gestionadas por cada Base de Instalación. Permite una evaluación geográfica visual para identificar las bases más activas (las que tienen la mayor carga de trabajo) y las áreas de la ciudad con mayor densidad de incidentes, lo que informa decisiones de reubicación o apertura de nuevas bases.</p>
   </div>
   
@@ -47,7 +47,6 @@
       desc: `
         <p><strong>Emergencia por prioridad:</strong> Muestra la distribución de las emergencias clasificadas por su tipo y prioridad y ayuda a identificar que tipos y prioridades son más frecuentes y generan la mayor carga de trabajo y dónde se encuentra la demanda de recursos más urgente.</p>
         <p><strong>Tiempo promedio de respuesta:</strong> Muestra el promedio de tiempo, en minutos, transcurrido desde que se reporta una emergencia hasta la llegada de la primera unidad. Un valor bajo indica una alta eficiencia operativa, mientras que un valor alto señala posibles cuellos de botella en la asignación o el desplazamiento de vehículos.</p>
-        <p><strong>Tendencia de emergencias:</strong> Muestra la evolución del volumen de emergencias a lo largo del tiempo. Es fundamental para detectar patrones estacionales (más accidentes en ciertas horas del día) y tendencias a largo plazo. Permite al equipo de planificación anticipar picos de demanda y ajustar la disponibilidad del personal.</p>
         <p><strong>Emergencias por base de instalación:</strong> Este mapa geográfico utiliza burbujas cuyo tamaño representa la cantidad total de emergencias gestionadas por cada Base de Instalación. Permite una evaluación geográfica visual para identificar las bases más activas (las que tienen la mayor carga de trabajo) y las áreas de la ciudad con mayor densidad de incidentes, lo que informa decisiones de reubicación o apertura de nuevas bases.</p>
       `
     },
@@ -62,14 +61,27 @@
         <p><strong>Eventos por Sensor y Unidad de Medida:</strong> Detalla la cantidad de eventos generados, clasificados por el Sensor que los reportó (ej. Sensor de Temperatura, Sensor de Presión) y su Unidad de Medida. Este gráfico es esencial para el equipo de Mantenimiento y Calidad de Datos, ya que valida la actividad y fiabilidad de la infraestructura de monitoreo (IoT).</p>
       `
     },
+    detallado: {
+      src: 'https://app.powerbi.com/view?r=eyJrIjoiMmMyYjY4YTItZGQ1MS00ODZhLWI4M2YtYmRiY2I0ZTAxNDg0IiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9&pageName=1215fc585eb3f1ea83ee',
+      icon: 'bi-card-list',
+      title: 'Análisis detallado',
+      desc: `
+        <p><strong>Emergencias por Estado Actual del Vehículo:</strong> Este gráfico permite auditar la disponibilidad y eficiencia de la flota. Muestra cuántas emergencias fueron atendidas por vehículos que estaban 'Disponibles', 'En Ruta' (ya ocupados), o incluso en 'Mantenimiento' (si hay errores en la asignación). Su objetivo principal es asegurar que los vehículos críticos pasen la menor cantidad de tiempo en estados no operativos (Mantenimiento, Reparación, Inactivo), informando las decisiones de planificación de la flota.</p>
+        <p><strong>Eventos por Sensor y Unidad de Medida:</strong> Se centra en la calidad de los datos y la infraestructura IoT. Ayuda al equipo técnico a identificar los sensores que tienen un alto volumen de reportes (lo que podría indicar una alta actividad, o un mal funcionamiento, o hipersensibilidad). Es vital para el mantenimiento predictivo y para validar si las unidades de medida usadas (ej., temperatura, presión) son las más relevantes para la detección de emergencias.</p>
+        <p><strong>Distribución de Vehículos Asignados:</strong> Muestra el mix de recursos utilizados. Permite identificar si los vehículos de mayor costo (ej., ambulancias especializadas) se están usando en exceso para incidentes que podrían ser manejados por unidades más simples. Es crucial para el análisis de costos y la planificación de inventario (comprar más del tipo de vehículo más demandado).</p>
+        <p><strong>Emergencias Asignadas por Usuario:</strong> Es una métrica de gestión de personal. Muestra la productividad individual de los operadores o asignadores. Es fundamental para balancear la carga de trabajo entre el equipo, identificar a los empleados con rendimiento sobresaliente para reconocimiento, y detectar a aquellos que podrían estar sobrecargados o necesitar capacitación adicional.</p>
+      `
+    },
     impacto: {
       src: 'https://app.powerbi.com/view?r=eyJrIjoiMmMyYjY4YTItZGQ1MS00ODZhLWI4M2YtYmRiY2I0ZTAxNDg0IiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9&pageName=928955e94ff9710bbdf7',
       icon: 'bi-heart-pulse',
-      title: 'Análisis de Usuarios y Dispositivos',
+      title: 'Tendencias temporales',
       desc: `
         <p><strong>Emergencias Asignadas por Usuario:</strong> Muestra la carga de trabajo, indicando cuántas emergencias fueron asignadas o gestionadas por cada Usuario u Operador. Es una herramienta de gestión de personal para identificar a los operadores más productivos o, alternativamente, aquellos que requieren apoyo o redistribución de tareas.</p>
         <p><strong>Antigüedad de Instalación de Dispositivos:</strong> Es una tabla de referencia que muestra la Fecha de Instalación y el tiempo transcurrido (Antigüedad) de cada Dispositivo de Monitoreo/Reporte. Es utilizado por el equipo de Activos Fijos para planificar y programar el mantenimiento preventivo y la sustitución de equipos antiguos.</p>
         <p><strong>Emergencias Reportadas por Código:</strong> Proporciona un desglose detallado de los incidentes por su Descripción de Emergencia y su Código Único. La matriz permite al usuario auditar el volumen exacto de cada tipo específico de incidente, siendo útil para informes regulatorios y análisis de riesgos detallado.</p>
+        <p><strong>Tendencia de emergencias:</strong> Muestra la evolución del volumen de emergencias a lo largo del tiempo. Es fundamental para detectar patrones estacionales (más accidentes en ciertas horas del día) y tendencias a largo plazo. Permite al equipo de planificación anticipar picos de demanda y ajustar la disponibilidad del personal.</p>
+        <p><strong>Tabla de Datos Crudos para Acción:</strong> Esta tabla muestra el detalle específico de las 5 emergencias que registraron el peor rendimiento (el TiempoRespuestaMin más alto) en todo el sistema. Su propósito no es mostrar la tendencia, sino proporcionar la evidencia exacta que requiere una acción inmediata.</p>
       `
     }
   };
